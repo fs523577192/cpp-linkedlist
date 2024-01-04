@@ -12,7 +12,7 @@ public:
     LinkedListNode(T data) : data(data), next(nullptr) {};
     LinkedListNode(T data, LinkedListNode<T> *next) : data(data), next(next) {};
 
-    ~LinkedListNode() {};
+    ~LinkedListNode() noexcept {};
 };
 
 template<typename T> class LinkedList : public List<T>
@@ -22,9 +22,15 @@ private:
 
 public:
     LinkedList() : head(nullptr) {};
-    ~LinkedList() {};
+    ~LinkedList() noexcept {
+        while (this->head != nullptr) {
+            LinkedListNode<T> *current = head;
+            head = head->next;
+            delete current;
+        }
+    };
 
-    unsigned size()
+    unsigned size() noexcept
     {
         unsigned int count = 0;
         LinkedListNode<T> *current = head;
@@ -75,6 +81,28 @@ public:
         *pCurrent = new LinkedListNode<T>(value, *pCurrent);
     }
     
+    T remove(unsigned index) 
+    {
+        LinkedListNode<T> **pCurrent = &(this->head);
+        for (unsigned i = 0; i < index; i++) {
+            if ((*pCurrent) == nullptr) {
+                throw std::out_of_range("Index out of range");
+            }
+            pCurrent = &(
+                (*pCurrent)->next
+            );
+        }
+
+        LinkedListNode<T> *current = *pCurrent;
+        if (current == nullptr) {
+            throw std::out_of_range("Index out of range");
+        }
+
+        T value = current->data;
+        *pCurrent = current->next;
+        delete current;
+        return value;
+    }
 };
 
 #endif // LINKED_LIST_H
