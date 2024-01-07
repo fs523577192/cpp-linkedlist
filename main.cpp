@@ -33,6 +33,10 @@ public:
         if (result != 0) {
             return result;
         }
+        result = this->testRemove();
+        if (result != 0) {
+            return result;
+        }
         return this->testAdd();
     }
 
@@ -49,38 +53,23 @@ public:
     int testGet()
     {
         std::cout << "Test case 2: trying to get an item from an empty list" << std::endl;
-        bool thrown = false;
-        try {
-            this->pList->get(0);
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+        for (unsigned i = 0; i <= 1; i += 1) {
+            bool thrown = false;
+            try {
+                this->pList->get(i);
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            } catch (std::out_of_range e) {
+                if (e.what() != std::string("Index out of range")) {
+                    std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
+                            << e.what() << std::endl;
+                }
+                thrown = true;
             }
-            thrown = true;
-        }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        }
-
-        thrown = false;
-        try {
-            this->pList->get(1);
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+            if (!thrown) {
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
             }
-            thrown = true;
-        }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
         }
         return 0;
     }
@@ -88,77 +77,71 @@ public:
     int testSet()
     {
         std::cout << "Test case 3: trying to set an item in an empty list" << std::endl;
-        bool thrown = false;
-        try {
-            this->pList->set(0, randomInt());
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+        for (unsigned i = 0; i <= 1; i += 1) {
+            bool thrown = false;
+            try {
+                this->pList->set(i, randomInt());
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            } catch (std::out_of_range e) {
+                if (e.what() != std::string("Index out of range")) {
+                    std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
+                            << e.what() << std::endl;
+                }
+                thrown = true;
             }
-            thrown = true;
+            if (!thrown) {
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            }
         }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        }
+        return 0;
+    }
 
-        thrown = false;
-        try {
-            this->pList->set(1, randomInt());
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+    int testRemove()
+    {
+        std::cout << "Test case 4: trying to remove an item from an empty list" << std::endl;
+        for (unsigned i = 0; i <= 1; i += 1) {
+            bool thrown = false;
+            try {
+                this->pList->set(i, randomInt());
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            } catch (std::out_of_range e) {
+                if (e.what() != std::string("Index out of range")) {
+                    std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
+                            << e.what() << std::endl;
+                }
+                thrown = true;
             }
-            thrown = true;
-        }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
+            if (!thrown) {
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            }
         }
         return 0;
     }
 
     int testAdd()
     {
-        std::cout << "Test case 4: trying to add an item into an empty list" << std::endl;
-        bool thrown = false;
-        try {
-            this->pList->add(1, randomInt());
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+        std::cout << "Test case 5: trying to add an item into an empty list" << std::endl;
+        for (unsigned i = 1; i <= 2; i += 1) {
+            bool thrown = false;
+            try {
+                this->pList->add(i, randomInt());
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            } catch (std::out_of_range e) {
+                if (e.what() != std::string("Index out of range")) {
+                    std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
+                            << e.what() << std::endl;
+                }
+                thrown = true;
             }
-            thrown = true;
-        }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        }
-
-        thrown = false;
-        try {
-            this->pList->add(2, randomInt());
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+            if (!thrown) {
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
             }
-            thrown = true;
-        }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
         }
         return 0;
     }
@@ -198,6 +181,11 @@ public:
             return result;
         }
 
+        result = this->testRemove();
+        if (result != 0) {
+            return result;
+        }
+
         return this->testAdd();
     }
 
@@ -220,38 +208,23 @@ public:
             return -1;
         }
 
-        bool thrown = false;
-        try {
-            this->pList->get(1);
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+        for (unsigned i = 1; i <= 2; i += 1) {
+            bool thrown = false;
+            try {
+                this->pList->get(i);
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            } catch (std::out_of_range e) {
+                if (e.what() != std::string("Index out of range")) {
+                    std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
+                            << e.what() << std::endl;
+                }
+                thrown = true;
             }
-            thrown = true;
-        }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        }
-
-        thrown = false;
-        try {
-            this->pList->get(2);
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+            if (!thrown) {
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
             }
-            thrown = true;
-        }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
         }
         return 0;
     }
@@ -266,60 +239,71 @@ public:
             return result;
         }
 
-        bool thrown = false;
-        try {
-            this->pList->set(1, randomInt());
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+        for (unsigned i = 1; i <= 2; i += 1) {
+            bool thrown = false;
+            try {
+                this->pList->set(i, randomInt());
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            } catch (std::out_of_range e) {
+                if (e.what() != std::string("Index out of range")) {
+                    std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
+                            << e.what() << std::endl;
+                }
+                thrown = true;
             }
-            thrown = true;
+            if (!thrown) {
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            }
         }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        }
+        return 0;
+    }
 
-        thrown = false;
-        try {
-            this->pList->set(2, randomInt());
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+    int testRemove()
+    {
+        std::cout << "Test case 4: trying to remove an item from an empty list" << std::endl;
+        for (unsigned i = 1; i <= 2; i += 1) {
+            bool thrown = false;
+            try {
+                this->pList->set(i, randomInt());
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            } catch (std::out_of_range e) {
+                if (e.what() != std::string("Index out of range")) {
+                    std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
+                            << e.what() << std::endl;
+                }
+                thrown = true;
             }
-            thrown = true;
-        }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
+            if (!thrown) {
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            }
         }
         return 0;
     }
 
     int testAdd()
     {
-        std::cout << "Test case 4: trying to add an item into the list" << std::endl;
-        bool thrown = false;
-        try {
-            this->pList->add(2, randomInt());
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+        std::cout << "Test case 5: trying to add an item into the list" << std::endl;
+        for (unsigned i = 2; i <= 3; i += 1) {
+            bool thrown = false;
+            try {
+                this->pList->add(i, randomInt());
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            } catch (std::out_of_range e) {
+                if (e.what() != std::string("Index out of range")) {
+                    std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
+                            << e.what() << std::endl;
+                }
+                thrown = true;
             }
-            thrown = true;
-        }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
+            if (!thrown) {
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            }
         }
         return 0;
     }
@@ -361,6 +345,11 @@ public:
             return result;
         }
 
+        result = this->testRemove();
+        if (result != 0) {
+            return result;
+        }
+
         return this->testAdd();
     }
 
@@ -387,38 +376,23 @@ public:
             return -1;
         }
 
-        bool thrown = false;
-        try {
-            this->pList->get(2);
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+        for (unsigned i = 2; i <= 3; i += 1) {
+            bool thrown = false;
+            try {
+                this->pList->get(i);
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            } catch (std::out_of_range e) {
+                if (e.what() != std::string("Index out of range")) {
+                    std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
+                            << e.what() << std::endl;
+                }
+                thrown = true;
             }
-            thrown = true;
-        }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        }
-
-        thrown = false;
-        try {
-            this->pList->get(3);
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+            if (!thrown) {
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
             }
-            thrown = true;
-        }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
         }
         return 0;
     }
@@ -435,60 +409,71 @@ public:
             return result;
         }
 
-        bool thrown = false;
-        try {
-            this->pList->set(2, randomInt());
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+        for (unsigned i = 2; i <= 3; i += 1) {
+            bool thrown = false;
+            try {
+                this->pList->set(i, randomInt());
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            } catch (std::out_of_range e) {
+                if (e.what() != std::string("Index out of range")) {
+                    std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
+                            << e.what() << std::endl;
+                }
+                thrown = true;
             }
-            thrown = true;
+            if (!thrown) {
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            }
         }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        }
+        return 0;
+    }
 
-        thrown = false;
-        try {
-            this->pList->set(3, randomInt());
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+    int testRemove()
+    {
+        std::cout << "Test case 4: trying to remove an item from an empty list" << std::endl;
+        for (unsigned i = 2; i <= 3; i += 1) {
+            bool thrown = false;
+            try {
+                this->pList->set(i, randomInt());
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            } catch (std::out_of_range e) {
+                if (e.what() != std::string("Index out of range")) {
+                    std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
+                            << e.what() << std::endl;
+                }
+                thrown = true;
             }
-            thrown = true;
-        }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
+            if (!thrown) {
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            }
         }
         return 0;
     }
 
     int testAdd()
     {
-        std::cout << "Test case 4: trying to add an item into the list" << std::endl;
-        bool thrown = false;
-        try {
-            this->pList->add(3, randomInt());
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
-        } catch (std::out_of_range e) {
-            if (e.what() != std::string("Index out of range")) {
-                std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
-                        << e.what() << std::endl;
+        std::cout << "Test case 5: trying to add an item into the list" << std::endl;
+        for (unsigned i = 3; i <= 4; i += 1) {
+            bool thrown = false;
+            try {
+                this->pList->add(3, randomInt());
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            } catch (std::out_of_range e) {
+                if (e.what() != std::string("Index out of range")) {
+                    std::cerr << "The exception message is expected to be 'Index out of range', but is" << std::endl
+                            << e.what() << std::endl;
+                }
+                thrown = true;
             }
-            thrown = true;
-        }
-        if (!thrown) {
-            std::cerr << "An out_of_range is expected to be thrown" << std::endl;
-            return -1;
+            if (!thrown) {
+                std::cerr << "An out_of_range is expected to be thrown" << std::endl;
+                return -1;
+            }
         }
         return 0;
     }
